@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Conservation Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-content">
+                <h1>Wildlife Conservation Challenge</h1>
+                <p>Test your knowledge of wildlife utilization and biodiversity across 7 challenging levels!</p>
+                <div class="level-progress">
+                    <div class="progress-bar">
+                        <div class="progress" id="overallProgress"></div>
+                    </div>
+                    <span id="progressText">0% Complete</span>
+                </div>
+                <button id="startBtn" class="btn">Start Quiz</button>
+            </div>
+        </div>
+
+        <div class="quiz-screen" id="quizScreen">
+            <div class="quiz-header">
+                <div class="level-info">
+                    <span class="level-badge">Level <span id="currentLevel">1</span></span>
+                    <span class="question-count">Question <span id="currentQuestion">1</span>/20</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="questionProgress"></div>
+                    </div>
+                    <span id="scoreText">Score: 0/20</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 id="questionText">Question goes here</h2>
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="prevBtn" class="btn" disabled>Previous Question</button>
+                <button id="nextBtn" class="btn" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <div class="result-screen" id="resultScreen">
+            <div class="result-content">
+                <div id="levelComplete">
+                    <h2>Level <span id="completedLevel">1</span> Complete!</h2>
+                    <p>You scored <span id="finalScore">17</span>/20</p>
+                    <div class="result-message" id="resultMessage"></div>
+                    <button id="nextLevelBtn" class="btn">Continue to Level <span id="nextLevelNum">2</span></button>
+                </div>
+                <div id="quizComplete" style="display: none;">
+                    <h2>Quiz Master!</h2>
+                    <p>Congratulations! You've completed all 7 levels!</p>
+                    <div class="certificate">
+                        <i class="fas fa-certificate"></i>
+                        <p>Wildlife Conservation Expert</p>
+                    </div>
+                    <button id="restartBtn" class="btn">Restart Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
