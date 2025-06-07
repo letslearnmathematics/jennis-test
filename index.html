@@ -3,76 +3,657 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildlife Conservation Quiz</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>EduTest Pro - Student Assessment Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        /* Subjects Grid */
+        .subjects {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h3 {
+            font-size: 2rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .subject-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subject-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .subject-card-content {
+            padding: 20px;
+        }
+        
+        .subject-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .subject-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .subject-card a {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .subject-card a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .subject-card a i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .subject-card a:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .feature-item p {
+            color: #666;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 40px;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 0 0 30px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h3 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <div class="welcome-screen" id="welcomeScreen">
-            <div class="welcome-content">
-                <h1>Wildlife Conservation Challenge</h1>
-                <p>Test your knowledge of wildlife utilization and biodiversity across 7 challenging levels!</p>
-                <div class="level-progress">
-                    <div class="progress-bar">
-                        <div class="progress" id="overallProgress"></div>
-                    </div>
-                    <span id="progressText">0% Complete</span>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="./image/logo1.png" alt="EduTest Logo">
+                    <h1>Edu<span>Test</span> Pro</h1>
                 </div>
-                <button id="startBtn" class="btn">Start Quiz</button>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Subjects</a></li>
+                    <li><a href="#">Tests</a></li>
+                    <li><a href="#">Results</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Comprehensive Student Assessment Platform</h2>
+            <p>Access a wide range of subject tests designed to evaluate and enhance your students' knowledge and skills. Track progress and identify areas for improvement.</p>
+            <a href="#" class="cta-button">Explore Tests <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+    
+    <!-- Subjects Section -->
+    <section class="subjects">
+        <div class="container">
+            <div class="section-title">
+                <h3>Available Subjects</h3>
+            </div>
+            
+            <div class="subjects-grid">
+                <!-- Subject Card 1 -->
+                <div class="subject-card">
+                    <img src="./image/Screenshot 2025-06-07 015252.png" alt="Wildlife-Utilisation">
+                    <div class="subject-card-content">
+                        <h4>Wildlife Utilisation</h4>
+                        <p>Comprehensive tests covering all topics under wildlife utilisation.</p>
+                        <a href="./wildlife-utilisation.html">View Tests <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Subject Card 2 -->
+                <div class="subject-card">
+                    <img src="./image/reference-pic.jpg" alt="Reference Service">
+                    <div class="subject-card-content">
+                        <h4>Reference Service</h4>
+                        <p>Explore the principles and practices of reference service, including information retrieval, 
+                            user needs assessment, and effective resource guidance.</p>
+                        <a href="reference-service.html">View Tests <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Subject Card 3 -->
+                <div class="subject-card">
+                    <img src="./image/comm-skills.png" alt="Communication Skills">
+                    <div class="subject-card-content">
+                        <h4>Communication Skills</h4>
+                        <p>Assess your reading, writing, listening, and speaking abilities to improve overall communication skills.</p>
+                        <a href="comm-skills.html">View Tests <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                
+                <!-- Subject Card 4 
+                <div class="subject-card">
+                    <img src="https://via.placeholder.com/400x300?text=History" alt="History">
+                    <div class="subject-card-content">
+                        <h4>History</h4>
+                        <p>World history, national history, and civics tests to assess historical knowledge.</p>
+                        <a href="history-tests.html">View Tests <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                -->
+                
+                <!-- Subject Card 5 
+                <div class="subject-card">
+                    <img src="https://via.placeholder.com/400x300?text=Computer" alt="Computer Science">
+                    <div class="subject-card-content">
+                        <h4>Computer Science</h4>
+                        <p>Programming, algorithms, and computer fundamentals assessments.</p>
+                        <a href="computer-tests.html">View Tests <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                -->
+                
+                <!-- Subject Card 6 
+                <div class="subject-card">
+                    <img src="https://via.placeholder.com/400x300?text=Foreign" alt="Foreign Languages">
+                    <div class="subject-card-content">
+                        <h4>Foreign Languages</h4>
+                        <p>Spanish, French, German and other language proficiency tests.</p>
+                        <a href="language-tests.html">View Tests <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                -->
+
             </div>
         </div>
-
-        <div class="quiz-screen" id="quizScreen">
-            <div class="quiz-header">
-                <div class="level-info">
-                    <span class="level-badge">Level <span id="currentLevel">1</span></span>
-                    <span class="question-count">Question <span id="currentQuestion">1</span>/20</span>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress" id="questionProgress"></div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h3>Why Choose Our Platform</h3>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <span id="scoreText">Score: 0/20</span>
+                    <h4>Progress Tracking</h4>
+                    <p>Detailed analytics and reporting to track student progress over time and identify areas for improvement.</p>
                 </div>
-            </div>
-
-            <div class="question-container">
-                <h2 id="questionText">Question goes here</h2>
-                <div class="options-container" id="optionsContainer">
-                    <!-- Options will be inserted here by JavaScript -->
+                
+                <!-- Feature 2 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Responsive Design</h4>
+                    <p>Fully responsive platform that works seamlessly on all devices - desktops, tablets, and smartphones.</p>
                 </div>
-            </div>
-
-            <div class="quiz-footer">
-                <button id="prevBtn" class="btn" disabled>Previous Question</button>
-                <button id="nextBtn" class="btn" disabled>Next Question</button>
+                
+                <!-- Feature 3 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Curriculum Aligned</h4>
+                    <p>Tests designed by educators to align with standard curricula and learning objectives.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Time-Saving</h4>
+                    <p>Automated grading and instant results save teachers valuable time.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>Customizable</h4>
+                    <p>Create your own tests or modify existing ones to suit your specific needs.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Secure</h4>
+                    <p>Enterprise-grade security to protect student data and assessment integrity.</p>
+                </div>
             </div>
         </div>
-
-        <div class="result-screen" id="resultScreen">
-            <div class="result-content">
-                <div id="levelComplete">
-                    <h2>Level <span id="completedLevel">1</span> Complete!</h2>
-                    <p>You scored <span id="finalScore">17</span>/20</p>
-                    <div class="result-message" id="resultMessage"></div>
-                    <button id="nextLevelBtn" class="btn">Continue to Level <span id="nextLevelNum">2</span></button>
-                </div>
-                <div id="quizComplete" style="display: none;">
-                    <h2>Quiz Master!</h2>
-                    <p>Congratulations! You've completed all 7 levels!</p>
-                    <div class="certificate">
-                        <i class="fas fa-certificate"></i>
-                        <p>Wildlife Conservation Expert</p>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <!-- Column 1 -->
+                <div class="footer-column">
+                    <h4>About EduTest Pro</h4>
+                    <p>A comprehensive student assessment platform designed by educators to enhance learning outcomes through targeted testing.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <button id="restartBtn" class="btn">Restart Quiz</button>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Subjects</a></li>
+                        <li><a href="#">Test Library</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Teacher Resources</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">System Requirements</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Near University of Cape Coast</p>
+                    <p><i class="fas fa-phone"></i> +233 20 871 1375</p>
+                    <p><i class="fas fa-envelope"></i> info@edutestpro.com</p>
                 </div>
             </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 EduTest Pro. All Rights Reserved.</p>
+            </div>
         </div>
-    </div>
-
-    <script src="questions.js"></script>
-    <script src="script.js"></script>
+    </footer>
+    
+    <script src="./js/script.js"></script>
 </body>
 </html>
